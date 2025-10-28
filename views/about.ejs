@@ -1,23 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-</head>
+<%- include('./partials/head.ejs') %>
+
 <body>
 
-    <nav>
-        <div class="site-title">
-            <a href="/"><h1>Nik&apos;s Blogs</h1></a>
-            <p>A blogging site</p>
-        </div>
-        <ul>
-            <li><a href="/">Blogs</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/blogs/create">New Blog</a></li>
-        </ul>
-    </nav>
+    <%- include('./partials/nav.ejs') %>
 
     <div class="about content">
         <h2>About Nik&apos;s Blogs</h2>
@@ -26,6 +13,7 @@
         <p>Whether you&apos;re here to learn, share, or just explore, I hope you find something that inspires you.</p>
         <p><em>– Nik</em></p>
     </div>
+    <%- include('./partials/footer.ejs') %>
 
 </body>
 </html>
