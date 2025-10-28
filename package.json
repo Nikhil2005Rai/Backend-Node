@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Nikhil2005Rai/Backend-Node#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^5.1.0",
     "lodash": "^4.17.21",
     "nodemon": "^3.1.10"
