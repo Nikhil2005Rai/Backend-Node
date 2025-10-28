@@ -1,5 +1,6 @@
 const http = require('http');
 const fs = require('fs');
+const _ = require('lodash');
 
 const server = http.createServer((req, res) => {
     // console.log(req.url, req.method);
@@ -12,7 +13,11 @@ const server = http.createServer((req, res) => {
     //     response: 'This is response...'
     // }));
     // res.end();
-    console.log(req.url);
+
+    //lodash
+    const num = _.random(0,20);
+    console.log(num);
+    //set header content-type
     res.setHeader('Content-type', 'text/html');
 
     let path = './views/';
