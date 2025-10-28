@@ -1,7 +1,20 @@
 const express = require('express');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 //express app
 const app = express();
+
+//connect to mongodb and listen for request
+
+const dbURI = process.env.MONGO_URI;
+const port  = process.env.PORT || 3000;
+
+mongoose.connect(dbURI)
+    .then((res) => console.log('Connected to MongoDB Atlas'))
+    .then(() => app.listen(port, () => console.log(`Server is running on the port ${port}`)))
+    .catch(err => console.log(err));
 
 // register view engine
 app.set('view engine', 'ejs');
@@ -9,8 +22,22 @@ app.set('view engine', 'ejs');
 //giving path of view's
 // app.set('views', 'views'); //giving relative folder name (views by default)
 
-//listen for request
-app.listen(3000);
+
+
+
+
+
+// app.use((req, res, next) => {
+    //     console.log('new request made =>');
+    //     console.log('host: ', req.hostname);
+    //     console.log('path: ', req.path);
+    //     console.log('method: ', req.method);
+    //     next();
+    // });
+    
+//middleware & static files (ex: css, img)
+app.use(express.static('public'));
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
     // res.sendFile('./views/index.html', { root: __dirname });
