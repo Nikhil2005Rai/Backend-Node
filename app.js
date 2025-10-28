@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const Blog = require('./models/blog')
 require('dotenv').config();
 
 //express app
@@ -10,34 +11,69 @@ const app = express();
 
 const dbURI = process.env.MONGO_URI;
 const port  = process.env.PORT || 3000;
+ 
+const startServer = async () => {
+  try {
+    await mongoose.connect(dbURI);
+    console.log('Connected to MongoDB Atlas');
+    app.listen(port, () => console.log(`Server running on port ${port}`));
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+  }
+};
+startServer();
 
-mongoose.connect(dbURI)
-    .then((res) => console.log('Connected to MongoDB Atlas'))
-    .then(() => app.listen(port, () => console.log(`Server is running on the port ${port}`)))
-    .catch(err => console.log(err));
+
 
 // register view engine
 app.set('view engine', 'ejs');
-
 //giving path of view's
 // app.set('views', 'views'); //giving relative folder name (views by default)
 
 
-
-
-
-
-// app.use((req, res, next) => {
-    //     console.log('new request made =>');
-    //     console.log('host: ', req.hostname);
-    //     console.log('path: ', req.path);
-    //     console.log('method: ', req.method);
-    //     next();
-    // });
-    
 //middleware & static files (ex: css, img)
 app.use(express.static('public'));
 app.use(morgan('dev'));
+
+
+//mongoose and mono sandbox routes
+app.get('/add-blog', (req, res) => {
+    const blog = new Blog({
+        title: 'new blog',
+        snippet: 'about my new blog',
+        body: 'more about my new blog (edit)'
+    });
+
+    blog.save()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+app.get('/all-blogs', (req, res) => {
+    Blog.find()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
+
+app.get('/single-blog', (req, res) => {
+    Blog.findById('6900d1030d625c71dc39739c')
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+    
 
 app.get('/', (req, res) => {
     // res.sendFile('./views/index.html', { root: __dirname });
