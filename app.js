@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRouts')
 require('dotenv').config();
+const path = require('path');
+
 
 //express app
 const app = express();
@@ -28,6 +30,8 @@ startServer();
 // register view engine
 app.set('view engine', 'ejs');
 //giving path of view's
+app.set('views', path.join(__dirname, 'views'));
+
 // app.set('views', 'views'); //giving relative folder name (views by default)
 
 
