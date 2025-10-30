@@ -48,7 +48,7 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/blogs/create', (req, res) => {
-    res.render('create', { title: 'Create a new blog' });
+    res.render('blogs/create', { title: 'Create a new blog' });
 });
 
 app.use('/blogs', blogRoutes);
