@@ -2,5 +2,295 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blogs | <%= title %></title>
-    <link rel="stylesheet" href="/styles.css">
+    <!-- <link rel="stylesheet" href="/styles.css"> -->
+     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    font-family: 'Noto Serif', serif;
+    line-height: 1.6;
+    background-color: #fafafa;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    body {
+        max-width: 1200px;
+    }
+}
+
+p, h1, h2, h3, a, ul {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #222;
+}
+
+/* nav & footer styles */
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+    nav {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 60px;
+    }
+}
+
+.site-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .site-title {
+        margin-bottom: 0;
+        text-align: left;
+    }
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+nav h1 {
+    font-size: 2em;
+    margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+    nav h1 {
+        font-size: 3em;
+        margin-bottom: 0;
+    }
+}
+
+nav p, nav a {
+    color: #777;
+    font-weight: 300;
+}
+
+nav a {
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: crimson;
+}
+
+footer {
+    color: #777;
+    text-align: center;
+    margin: 40px auto 20px;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+}
+
+h2 {
+    margin-bottom: 30px;
+    font-size: 1.8em;
+}
+
+@media (min-width: 768px) {
+    h2 {
+        margin-bottom: 40px;
+        font-size: 2em;
+    }
+}
+
+h3 {
+    text-transform: capitalize;
+    margin-bottom: 8px;
+    font-size: 1.4em;
+}
+
+.content {
+    margin: 0 auto;
+    padding: 0 15px;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .content {
+        padding: 0 20px;
+    }
+}
+
+/* index styles */
+.blogs a {
+    display: block;
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    border-left: 6px solid crimson;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blogs a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.blogs a:hover h3 {
+    color: crimson;
+}
+
+.blogs .snippet {
+    color: #666;
+    margin-top: 10px;
+    font-size: 0.95em;
+}
+
+@media (min-width: 768px) {
+    .blogs a {
+        margin: 40px 0;
+        padding: 25px;
+    }
+}
+
+/* details styles */
+.details {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.details h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.details .content {
+    line-height: 1.8;
+    color: #444;
+}
+
+.delete {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff4444;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.delete:hover {
+    cursor: pointer;
+    background: #cc0000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* create styles */
+.create-blog form {
+    max-width: 90%;
+    margin: 0 auto;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 768px) {
+    .create-blog form {
+        max-width: 600px;
+        padding: 30px;
+    }
+}
+
+.create-blog input,
+.create-blog textarea {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.create-blog input:focus,
+.create-blog textarea:focus {
+    outline: none;
+    border-color: crimson;
+    box-shadow: 0 0 0 2px rgba(220,20,60,0.1);
+}
+
+.create-blog label {
+    display: block;
+    margin-top: 24px;
+    color: #444;
+    font-weight: bold;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.create-blog button {
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    background: crimson;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-blog button:hover {
+    background: #a51334;
+}
+
+@media (min-width: 768px) {
+    .create-blog button {
+        width: auto;
+        padding: 12px 30px;
+    }
+}
+     </style>
 </head>
