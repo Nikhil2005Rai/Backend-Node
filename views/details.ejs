@@ -14,4 +14,21 @@
     </div>
     <%- include('./partials/footer.ejs') %>
 </body>
-</html>
+
+<script>
+    const deleteBtn = document.querySelector('a.delete');
+
+    deleteBtn.addEventListener('click', (e) => {
+        const endpoint = `/blogs/${deleteBtn.dataset.doc}`;
+
+        fetch(endpoint, {
+            method: 'DELETE'
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            window.location.href = data.redirect;
+        })
+        .catch(err => console.log(err));
+    });
+</script>
+</html> 

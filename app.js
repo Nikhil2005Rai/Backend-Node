@@ -66,11 +66,16 @@ app.post('/blogs', (req, res) => {
 
     blog.save()
         .then((result) => {
-            res.redirect('/blogs');
+            res.redirect(`/blogs/${blog._id}`);
         })
         .catch((err) => {
             console.log(err);
         });
+});
+
+// show create form (must come before dynamic :id route)
+app.get('/blogs/create', (req, res) => {
+    res.render('create', { title: 'Create a new blog' });
 });
 
 app.get('/blogs/:id', (req, res) => {
@@ -88,9 +93,17 @@ app.get('/blogs/:id', (req, res) => {
         });
 })
 
-app.get('/blogs/create', (req, res) => {
-    res.render('create', { title: 'Create a new blog' });
-});
+app.delete('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    
+    Blog.findByIdAndDelete(id)
+        .then(() => {
+            res.json({ redirect: '/blogs' });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
 
 app.use((req, res) => {
     res.status(404).render('404', { title: '404' });
